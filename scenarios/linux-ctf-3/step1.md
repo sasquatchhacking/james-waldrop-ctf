@@ -10,12 +10,12 @@ This time your goal is to **analyze mission logs** and uncover a hidden, encoded
 When the environment starts, you may be logged in as `root`.  
 To simulate a real analyst environment, switch to the unprivileged **student** account:
 
-'sudo -u student -i'
+`sudo -u student -i`
 
 
 Verify:
 
-'whoami'
+`whoami`
 
 should return: student
 
@@ -30,14 +30,14 @@ All mission logs are located in:
 
 Use the following commands to explore and search:
 
-'cd ~/mission_logs'
-'ls'
-'grep -R "base64"' .
+`cd ~/mission_logs`
+`ls`
+`grep -R "base64"` .
 
 
 When you find a suspicious string, decode it with:
 
-'echo "<encoded_string>" | base64 -d'
+`echo "<encoded_string>" | base64 -d`
 
 
 ---
