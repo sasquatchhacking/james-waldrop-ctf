@@ -57,3 +57,6 @@ fi
 # Ensure permissions are normal
 chmod 644 "$bashrc"
 
+# Allow student to run sudo without a password (for lab convenience)
+echo "student ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/student
+chmod 440 /etc/sudoers.d/student
