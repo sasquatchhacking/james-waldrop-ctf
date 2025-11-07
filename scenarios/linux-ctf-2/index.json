@@ -9,5 +9,8 @@
   },
   "backend": {
     "imageid": "ubuntu"
+  },
+  "environment": {
+    "username": "student"
   }
 }
