@@ -2,54 +2,55 @@
 
 Welcome to your third Linux CTF mission!
 
-A post-mission analysis produced several logs under:
+This time your goal is to **analyze mission logs** and uncover a hidden, encoded flag.
+
+---
+
+## 🧭 Step 1 — Switch to the Student Account
+When the environment starts, you may be logged in as `root`.  
+To simulate a real analyst environment, switch to the unprivileged **student** account:
+
+'sudo -u student -i'
+
+
+Verify:
+
+'whoami'
+
+should return: student
+
+
+---
+
+## 🧩 Step 2 — Investigate the Logs
+All mission logs are located in:
 
 /home/student/mission_logs
 
 
-Somewhere in those logs is an **encoded artifact** that contains your flag.
+Use the following commands to explore and search:
+
+'cd ~/mission_logs'
+'ls'
+'grep -R "base64"' .
+
+
+When you find a suspicious string, decode it with:
+
+'echo "<encoded_string>" | base64 -d'
+
 
 ---
 
-## 🎯 Objectives
+## 💡 Hints
 
-1. Explore the mission logs with standard Linux tools.
-2. Locate the suspicious/encoded data.
-3. Decode it to recover the final flag.
+- Look for lines mentioning `encoded artifact` or `base64`.
+- Focus on using `grep`, `less`, and `base64` — you don’t need `sudo` for this one.
+- Remember: base64 decoding is your friend!
 
 ---
 
-## 🧭 Suggested Approach
-
-From your home directory:
-
-```bash
-cd ~/mission_logs
-ls
-
-Try using:
-
-    cat or less to read files
-
-    grep to search across multiple logs
-
-    grep -R "base64" . or search for suspicious patterns
-
-    base64 -d to decode any base64 strings you find
-
-Example decoding pattern:
-
-echo "ZmxhZ3tsb2dfYW5hbHlzaXNfcHJvfQ==" | base64 -d
-
-💡 Hints
-
-    Look for a log entry that explicitly mentions encoded artifact or base64.
-
-    You do not need sudo for this challenge.
-
-    Focus on reading and decoding, not changing permissions.
-
-When you succeed, you'll reveal a flag in this format:
+When you succeed, you’ll reveal the flag:
 
 flag{log_analysis_pro}
 
