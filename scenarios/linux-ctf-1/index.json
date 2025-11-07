@@ -8,10 +8,25 @@
         "title": "File Recovery Challenge",
         "text": "step1.md"
       }
-    ]
+    ],
+    "assets": {
+      "host01": [
+        {
+          "file": "init.sh",
+          "target": "/opt/init.sh",
+          "chmod": "+x"
+        }
+      ]
+    }
   },
-    "backend": {
+  "backend": {
     "imageid": "ubuntu"
   },
-  "onCreate": ["./init.sh"]
+  "environment": {
+    "uilayout": "terminal"
+  },
+  "onCreate": [
+    "bash /opt/init.sh"
+  ]
 }
+
