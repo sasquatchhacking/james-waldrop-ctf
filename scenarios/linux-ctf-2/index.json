@@ -1,0 +1,13 @@
+{
+  "title": "Linux CTF - Permissions Puzzle",
+  "description": "Challenge yourself to recover a protected flag by adjusting file permissions and ownership in Linux.",
+  "details": {
+    "intro": {
+      "text": "step1.md",
+      "background": "setup.sh"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
