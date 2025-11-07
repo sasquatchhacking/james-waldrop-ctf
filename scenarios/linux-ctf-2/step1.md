@@ -6,29 +6,36 @@ This time, your objective is to **recover a flag protected by strict permissions
 
 ---
 
-## 🧭 Objectives
-1. Locate the hidden directory.  
-2. Investigate the permissions on the files.  
-3. Adjust ownership or permissions to gain access to the flag.  
+## 🧭 Step 1 — Enter the Student Account
+When the environment starts, you’ll be logged in as `root`.  
+To complete this challenge properly, switch to the unprivileged **student** account first:
+
+sudo -u student -i
+
+
+Verify the switch:
+
+whoami
+
+should return: student
+
+
+---
+
+## 🧩 Step 2 — Investigate
+1. Navigate to `/home/student/secure`
+2. Use `ls -l` to inspect file permissions  
+3. Try reading the files and notice which ones are locked  
 
 ---
 
 ## 💡 Hints
-- Use `ls -l` to inspect file permissions.  
-- Try `chmod` or `chown` to adjust who can read files.  
-- Remember that permissions use binary triplets (r=4, w=2, x=1).  
+- Use `chmod` and `chown` to adjust who can read the files.  
+- Remember permission bits: **r=4**, **w=2**, **x=1**.  
+- The goal is to view the contents of `flag.txt`.
 
 ---
-
-## 🧩 Your Task
-A mysterious folder has appeared in your home directory called **secure**.  
-Inside is a file named `flag.txt` — but it’s locked down by the system.
-
-Can you retrieve the flag?
 
 When successful, you’ll see:
 
 flag{permissions_mastery_level_up}
----
-
-Good luck, Agent.
