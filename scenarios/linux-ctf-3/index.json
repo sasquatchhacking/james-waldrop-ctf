@@ -1,0 +1,16 @@
+{
+  "title": "Linux CTF - Log Hunter",
+  "description": "Hunt through mission logs using Linux tools to uncover a hidden flag.",
+  "details": {
+    "intro": {
+      "text": "step1.md",
+      "background": "setup.sh"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  },
+  "environment": {
+    "username": "student"
+  }
+}
