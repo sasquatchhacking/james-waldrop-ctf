@@ -3,6 +3,7 @@ set -e
 
 # Create unprivileged user 'student' and a normal home
 useradd -m -s /bin/bash student || true
+sudo -u student -i
 
 # Ensure student can use sudo only if you want (usually not for this puzzle)
 # apt-get update && apt-get install -y sudo
