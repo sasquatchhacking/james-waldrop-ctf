@@ -10,8 +10,8 @@
       }
     ]
   },
-  "environment": {
-    "dockerimage": "ubuntu:22.04"
+    "backend": {
+    "imageid": "ubuntu"
   },
   "onCreate": ["./init.sh"]
 }
