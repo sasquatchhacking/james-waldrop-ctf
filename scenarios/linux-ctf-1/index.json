@@ -11,7 +11,7 @@
     ]
   },
   "environment": {
-    "imageid": "ubuntu:22.04"
+    "dockerimage": "ubuntu:22.04"
   },
   "onCreate": ["./init.sh"]
 }
