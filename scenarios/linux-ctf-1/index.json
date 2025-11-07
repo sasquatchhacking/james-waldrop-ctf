@@ -15,18 +15,3 @@
   },
   "onCreate": ["./init.sh"]
 }
-": "Hands-on challenge to locate a hidden mission file using Linux terminal commands.",
-  "difficulty": "beginner",
-  "details": {
-    "steps": [
-      {
-        "title": "File Recovery Challenge",
-        "text": "step1.md"
-      }
-    ]
-  },
-  "environment": {
-    "dockerimage": "ubuntu:22.04"
-  },
-  "onCreate": ["./init.sh"]
-}
