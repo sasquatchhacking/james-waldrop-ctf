@@ -14,11 +14,11 @@ Your objective is to **find and read the hidden flag** located somewhere in this
 
 ## 💡 Hints
 Try these commands:
-  ls -la
-  cd
-  cat
-  grep
-  find / -name "*.flag" 2>/dev/null
+  `ls -la`
+  `cd`
+  `cat`
+  `grep`
+  `find / -name "*.flag" 2>/dev/null`
   
 ---
 
