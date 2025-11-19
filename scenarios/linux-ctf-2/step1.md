@@ -10,12 +10,12 @@ This time, your objective is to **recover a flag protected by strict permissions
 When the environment starts, you’ll be logged in as `root`.  
 To complete this challenge properly, switch to the unprivileged **student** account first:
 
-sudo -u student -i
+`sudo -u student -i`
 
 
 Verify the switch:
 
-whoami
+`whoami`
 
 should return: student
 
