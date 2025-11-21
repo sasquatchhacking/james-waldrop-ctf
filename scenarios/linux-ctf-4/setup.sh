@@ -1,9 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 
-apt-get update -y
+# Make a CTF working dir in /root
+mkdir -p /root/ctf
 
-apt-get install -y \
+sudo apt-get update -y
+
+sudo apt-get install -y \
   aircrack-ng \
   hashcat \
   hcxtools \
