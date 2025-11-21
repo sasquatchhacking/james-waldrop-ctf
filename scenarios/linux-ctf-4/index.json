@@ -1,20 +1,33 @@
 {
-  "title": "Linux CTF 4 – Break the Avengers Wi-Fi Password",
-"description": "Use aircrack-ng, hcxtools, and hashcat to crack a captured WPA2 handshake and recover the Wi-Fi password.",
-"difficulty": "intermediate",
-"details": {
-  "intro": {
-    "text": "intro.md",
-    "background": "setup.sh"
-  },
-  "steps": [
-    {
-      "title": "Crack the WPA2 Handshake",
-      "text": "step1.md"
+  "title": "Linux CTF 4 - WPA2 Handshake Cracking",
+  "description": "Use aircrack-ng / hashcat and a wordlist to crack a captured WPA2 handshake.",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "Crack the WPA2 Handshake",
+        "text": "step1.md"
+      }
+    ],
+    "assets": {
+      "host01": [
+        {
+          "file": "Handshake_02C0CA8D9944.pcap",
+          "target": "/root/ctf/",
+          "chmod": "+r"
+        },
+        {
+          "file": "setup.sh",
+          "target": "/root/",
+          "chmod": "+x"
+        }
+      ]
+    },
+    "backend": {
+      "imageid": "ubuntu"
     }
-  ]
-},
-"backend": {
-  "imageid": "ubuntu"
+  }
 }
-}
+
