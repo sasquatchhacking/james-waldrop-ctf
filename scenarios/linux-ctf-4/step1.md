@@ -163,14 +163,14 @@ Move it back into your main CTF folder:
 
 In Kali wordlists live in /usr/share/wordlists/.
 
-`wget https://github.com/danielmiessler/SecLists/blob/master/Passwords/Default-Credentials/default-passwords.txt`
+`wget https://github.com/sasquatchhacking/sasquatchhacking/blob/main/Top_1m_Passwords.txt`
 
 
 Now combine default-passwords and your CUPP list into a single mega wordlist:
 
 `cd ~/ctf`
 
-`cat /usr/share/wordlists/default-passwords.txt cupp-list.txt > combined.txt`
+`cat /usr/share/wordlists/Top_1m_Passwords.txt cupp-list.txt > combined.txt`
 
 `wc -l combined.txt`
 
@@ -186,17 +186,17 @@ Plus your custom Marvel-nerd-themed guesses from CUPP
 
 Hashcat doesn’t work directly with .pcap files.
 
-We’ll convert it to 2200 format using hcxpcapngtool:
+We’ll convert it to 22000 format using hcxpcapngtool:
 
 `cd ~/ctf`
 
-`hcxpcapngtool -o wifi.hc2200 Handshake_02C0CA8D9944.pcap`
+`hcxpcapngtool -o wifi.hc22000 Handshake_02C0CA8D9944.pcap`
 
 Check that the file was created:
 
 `ls -lh` 
 
-Something like `wifi.hc2200` should appear.
+Something like `wifi.hc22000` should appear.
 
 ## 8. Crack the Handshake with Hashcat
 
@@ -206,14 +206,14 @@ Run hashcat using the WPA-EAPOL hash mode (22000) and your combined wordlist:
 
 `cd ~/ctf`
 
-`hashcat -m 2200 wifi.hc2200 combined.txt --force`
+`hashcat -m 22000 wifi.hc22000 combined.txt --force`
 
 ⚠️ If hashcat complains about no compatible GPU, it may fall back to CPU.
 That’s fine for this lab.
 
 Once hashcat finds the password, you can show the cracked result with:
 
-`hashcat -m 2200 wifi.hc2200 combined.txt --show`
+`hashcat -m 22000 wifi.hc22000 combined.txt --show`
 
 Record the recovered Wi-Fi password.
 
