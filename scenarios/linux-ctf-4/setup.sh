@@ -11,19 +11,16 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
   hcxtools \
   wordlists
 
-# Make sure rockyou is unzipped and ready
-if [ -f /usr/share/wordlists/rockyou.txt.gz ]; then
-  echo "[*] Decompressing rockyou.txt..."
-  gzip -d /usr/share/wordlists/rockyou.txt.gz
-fi
+# Directory where this script lives
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Create working directory for the CTF
+# Make a CTF working dir in /root
 mkdir -p /root/ctf
-cd /root/ctf
 
-# Copy the handshake from the scenario filesystem if present
-if [ -f /root/Handshake_02C0CA8D9944.pcap ]; then
-  cp /root/Handshake_02C0CA8D9944.pcap .
-fi
+# Copy the pcap from the scenario folder into /root/ctf
+cp "$SCRIPT_DIR/Handshake_02C0CA8D9944.pcap" /root/ctf/Handshake_02C0CA8D9944.pcap
+
+# Lock in sane perms
+chmod 644 /root/ctf/Handshake_02C0CA8D9944.pcap
 
 echo "[*] Environment ready. Start in /root/ctf."
