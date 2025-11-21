@@ -13,21 +13,13 @@
     ],
     "assets": {
       "host01": [
-        {
-          "file": "Handshake_02C0CA8D9944.pcap",
-          "target": "/root/ctf/",
-          "chmod": "+r"
-        },
-        {
-          "file": "setup.sh",
-          "target": "/root/",
-          "chmod": "+x"
-        }
+        {"file": "Handshake_02C0CA8D9944.pcap", "target": "/root/", "chmod": "+r"},
+        {"file": "setup.sh", "target": "/root/", "chmod": "+x"}
       ]
+    }
     },
     "backend": {
       "imageid": "ubuntu"
     }
   }
-}
 
