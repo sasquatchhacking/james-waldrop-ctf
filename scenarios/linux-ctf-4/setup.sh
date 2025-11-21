@@ -1,17 +1,24 @@
 #!/bin/bash
-set -euo pipefail
+set -e
 
-# Make a CTF working dir in /root
-mkdir -p /root/ctf
+echo "[*] Updating package lists..."
+apt-get update -y
+
+echo "[*] Installing aircrack-ng and hashcat (core tools)..."
+DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  aircrack-ng \
+  hashcat
+
+echo "[*] Trying to install optional tools (hcxtools, wordlists)..."
+DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  hcxtools \
+  wordlists || echo "[!] Optional tools not available, continuing without them."
 
 # Directory where this script lives
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Copy the pcap from the scenario folder into /root/ctf
-cp "$SCRIPT_DIR/Handshake_02C0CA8D9944.pcap" /root/ctf/Handshake_02C0CA8D9944.pcap
-
-# Lock in sane perms
-chmod 644 /root/ctf/Handshake_02C0CA8D9944.pcap
+# Make a CTF working dir in /root
+mkdir -p /root/ctf
 
 # Copy the pcap from the scenario folder into /root/ctf
 if [ -f "$SCRIPT_DIR/Handshake_02C0CA8D9944.pcap" ]; then
@@ -23,10 +30,3 @@ else
 fi
 
 echo "[*] Environment ready. Start in /root/ctf."
-sudo apt-get update -y
-
-sudo apt-get install -y \
-  aircrack-ng \
-  hashcat \
-  hcxtools \
-  wordlists
