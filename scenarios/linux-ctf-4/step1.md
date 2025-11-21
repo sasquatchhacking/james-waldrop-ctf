@@ -36,7 +36,9 @@ You’ll practice:
 Start in a clean workspace:
 
 `mkdir -p ~/ctf`
+
 `cd ~/ctf`
+
 `pwd`
 
 You should now be in:
@@ -54,13 +56,13 @@ Download the .pcap directly from your GitHub repo:
 Verify the file:
 
 `ls -lh`
-`file Handshake_02C0CA8D9944.pcap`
 
-If wget isn’t installed, you can use curl instead:
+You should see something like this:
+Handshake_02C0CA8D9944.pcap
 
-`curl -L \
-  -o Handshake_02C0CA8D9944.pcap \
-  https://raw.githubusercontent.com/sasquatchhacking/james-waldrop-ctf/main/scenarios/linux-ctf-4/Handshake_02C0CA8D9944.pcap`
+You can use curl instead:
+
+`curl -L -o Handshake_02C0CA8D9944.pcap https://raw.githubusercontent.com/sasquatchhacking/james-waldrop-ctf/main/scenarios/linux-ctf-4/Handshake_02C0CA8D9944.pcap`
 
 ## 3. Install the Required Tools
 
@@ -78,19 +80,19 @@ Install them (on Ubuntu/Kali style systems):
 
 `sudo apt update`
 
-`sudo apt install -y \
-  aircrack-ng \
-  hashcat \
-  hcxtools \
-  git \
-  python3`
+`sudo apt install -y aircrack-ng`
+`sudo apt install -y hashcat`
+`sudo apt install -y hcxtools`
+
 
 Quick sanity checks:
 
 `aircrack-ng --help | head -n 3`
+
 `hashcat --version`
+
 `hcxpcapngtool --help | head -n 3`
-`python3 --version`
+
 
 ## 4. Inspect the Handshake
 
@@ -119,6 +121,7 @@ Now we’ll use CUPP (Common User Password Profiler) to generate custom password
 `cd ~/ctf`
 
 `git clone https://github.com/Mebus/cupp.git`
+
 `cd cupp`
 
 ### 5.2 Run CUPP in Interactive Mode
@@ -143,6 +146,7 @@ At the end, CUPP will create a wordlist file in the current directory (something
 Rename it to something obvious:
 
 `ls`
+
 `mv <generated-file>.txt cupp-list.txt`
 
 (Replace <generated-file> with the actual filename CUPP creates.)
@@ -150,25 +154,21 @@ Rename it to something obvious:
 Move it back into your main CTF folder:
 
 `mv cupp-list.txt ~/ctf/`
-`cd ~/ctf`
-
-## 6. Combine CUPP with rockyou
-
-Most wordlists live in /usr/share/wordlists/.
-
-If rockyou.txt.gz exists:
-
-`ls /usr/share/wordlists`
-
-Decompress it (once):
-
-`sudo gzip -d /usr/share/wordlists/rockyou.txt.gz 2>/dev/null || true`
-
-Now combine rockyou and your CUPP list into a single mega wordlist:
 
 `cd ~/ctf`
 
-`cat /usr/share/wordlists/rockyou.txt cupp-list.txt > combined.txt`
+## 6. Combine CUPP with password list from a github site
+
+In Kali wordlists live in /usr/share/wordlists/.
+
+`wget https://github.com/danielmiessler/SecLists/blob/master/Passwords/Default-Credentials/default-passwords.txt`
+
+
+Now combine default-passwords and your CUPP list into a single mega wordlist:
+
+`cd ~/ctf`
+
+`cat /usr/share/wordlists/default-passwords.txt cupp-list.txt > combined.txt`
 
 `wc -l combined.txt`
 
@@ -176,7 +176,7 @@ Now combine rockyou and your CUPP list into a single mega wordlist:
 
 You now have:
 
-A giant generic list (rockyou)
+A giant generic list
 
 Plus your custom Marvel-nerd-themed guesses from CUPP
 
@@ -184,17 +184,17 @@ Plus your custom Marvel-nerd-themed guesses from CUPP
 
 Hashcat doesn’t work directly with .pcap files.
 
-We’ll convert it to 22000 format using hcxpcapngtool:
+We’ll convert it to 2200 format using hcxpcapngtool:
 
 `cd ~/ctf`
 
-`hcxpcapngtool \
-  -o wifi.hc22000 \
-  Handshake_02C0CA8D9944.pcap`
+`hcxpcapngtool -o wifi.hc2200 Handshake_02C0CA8D9944.pcap`
 
 Check that the file was created:
 
-`ls -lh wifi.hc22000`
+`ls -lh` 
+
+Something like `wifi.hc2200` should appear.
 
 ## 8. Crack the Handshake with Hashcat
 
@@ -204,30 +204,31 @@ Run hashcat using the WPA-EAPOL hash mode (22000) and your combined wordlist:
 
 `cd ~/ctf`
 
-`hashcat -m 22000 wifi.hc22000 combined.txt --force`
+`hashcat -m 2200 wifi.hc2200 combined.txt --force`
 
 ⚠️ If hashcat complains about no compatible GPU, it may fall back to CPU.
 That’s fine for this lab.
 
 Once hashcat finds the password, you can show the cracked result with:
 
-`hashcat -m 22000 wifi.hc22000 combined.txt --show`
+`hashcat -m 2200 wifi.hc2200 combined.txt --show`
 
 Record the recovered Wi-Fi password.
 
 You’ll need it to complete the challenge.
 
 ## 9. (Optional) Crack with aircrack-ng
+
 If you want to see a more classic tool in action:
 
-bash
-Copy code
 `cd ~/ctf`
 
-aircrack-ng -w combined.txt Handshake_02C0CA8D9944.pcap
+`aircrack-ng -w combined.txt Handshake_02C0CA8D9944.pcap`
+
 This may be slower, but it’s a good comparison vs. hashcat.
 
 ## 10. What You Should Have at the End
+
 By the time you’re done, you should be able to answer:
 
 What is the ESSID of the captured Wi-Fi network?
@@ -235,11 +236,13 @@ What is the ESSID of the captured Wi-Fi network?
 What is the recovered WPA2 passphrase?
 
 Which wordlist entry actually matched the password?
-(Did it come from rockyou or your CUPP-generated list?)
+
+(Did it come from default-passwords or your CUPP-generated list?)
 
 You’ll submit the cracked Wi-Fi password as your final answer for this CTF step.
 
 ## Quick Self-Check
+
 Before moving on, you should be comfortable with:
 
 Downloading files from GitHub using wget or curl
