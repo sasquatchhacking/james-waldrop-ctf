@@ -81,7 +81,9 @@ Install them (on Ubuntu/Kali style systems):
 `sudo apt update`
 
 `sudo apt install -y aircrack-ng`
+
 `sudo apt install -y hashcat`
+
 `sudo apt install -y hcxtools`
 
 
