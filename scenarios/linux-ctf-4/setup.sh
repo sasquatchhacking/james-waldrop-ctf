@@ -13,6 +13,16 @@ cp "$SCRIPT_DIR/Handshake_02C0CA8D9944.pcap" /root/ctf/Handshake_02C0CA8D9944.pc
 # Lock in sane perms
 chmod 644 /root/ctf/Handshake_02C0CA8D9944.pcap
 
+# Copy the pcap from the scenario folder into /root/ctf
+if [ -f "$SCRIPT_DIR/Handshake_02C0CA8D9944.pcap" ]; then
+  cp "$SCRIPT_DIR/Handshake_02C0CA8D9944.pcap" /root/ctf/Handshake_02C0CA8D9944.pcap
+  chmod 644 /root/ctf/Handshake_02C0CA8D9944.pcap
+  echo "[*] Copied handshake to /root/ctf/"
+else
+  echo "[!] Handshake_02C0CA8D9944.pcap not found in $SCRIPT_DIR"
+fi
+
+echo "[*] Environment ready. Start in /root/ctf."
 sudo apt-get update -y
 
 sudo apt-get install -y \
